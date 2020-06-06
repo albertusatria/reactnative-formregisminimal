@@ -10,7 +10,7 @@ import React from 'react';
 import {View, Text, TextInput} from 'react-native';
 import stylesLogin from '../../asset/style';
 
-const FirstLast = ({callback}) => {
+const FirstLast = ({callbackFirstName, callbackLastName}) => {
   return (
     <View>
       <View style={stylesLogin.fieldControl}>
@@ -18,7 +18,7 @@ const FirstLast = ({callback}) => {
         <TextInput
           style={stylesLogin.input}
           placeholder="e.g. johndoe"
-          onChangeText={(text) => callback(text)}
+          onChangeText={(text) => callbackFirstName(text)}
         />
       </View>
       <View style={stylesLogin.fieldControl}>
@@ -26,7 +26,7 @@ const FirstLast = ({callback}) => {
         <TextInput
           style={stylesLogin.input}
           placeholder="e.g. .Jr"
-          //onChangeText={(text) => callback(text)}
+          onChangeText={(text) => callbackLastName(text)}
         />
       </View>
     </View>

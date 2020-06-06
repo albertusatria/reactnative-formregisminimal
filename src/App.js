@@ -6,8 +6,8 @@
  * @flow strict-local
  */
 
-import React, {useState, Platform} from 'react';
-import {View, SafeAreaView, ScrollView, Text} from 'react-native';
+import React, {useState} from 'react';
+import {View, SafeAreaView, ScrollView, Platform, Text} from 'react-native';
 
 import FirstLast from './component/FirstLast';
 import ButtonCustom from './component/ButtonCustom';

@@ -6,15 +6,19 @@
  * @flow strict-local
  */
 
-import React, {useState, useEffect} from 'react';
-import {View, SafeAreaView, ScrollView} from 'react-native';
+import React, {useState} from 'react';
+import {View, SafeAreaView, ScrollView, Text} from 'react-native';
 
 import FirstLast from './component/FirstLast';
 import ButtonCustom from './component/ButtonCustom';
 
 const App = () => {
+  const [firstname, setFirstname] = useState('');
+  const [lastname, setLastname] = useState('');
+
   const callbackParent = (value) => {
     console.log(value);
+    setFirstname(value);
   };
   return (
     <View>
@@ -25,6 +29,7 @@ const App = () => {
             <ButtonCustom type="Register" />
           </ScrollView>
         </View>
+        <Text>{firstname}</Text>
       </SafeAreaView>
     </View>
   );

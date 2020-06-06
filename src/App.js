@@ -7,26 +7,21 @@
  */
 
 import React, {useState, useEffect} from 'react';
-import {
-  View,
-  Text,
-  TextInput,
-  SafeAreaView,
-  ScrollView,
-  Alert,
-  TouchableOpacity,
-} from 'react-native';
-import stylesLogin from '../src/asset/style';
+import {View, SafeAreaView, ScrollView} from 'react-native';
+
 import FirstLast from './component/FirstLast';
 import ButtonCustom from './component/ButtonCustom';
 
 const App = () => {
+  const callbackParent = (value) => {
+    console.log(value);
+  };
   return (
     <View>
       <SafeAreaView>
         <View>
           <ScrollView>
-            <FirstLast />
+            <FirstLast callback={callbackParent} />
             <ButtonCustom type="Register" />
           </ScrollView>
         </View>

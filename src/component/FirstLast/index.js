@@ -10,7 +10,11 @@ import React from 'react';
 import {View, Text, TextInput} from 'react-native';
 import stylesLogin from '../../asset/style';
 
-const FirstLast = ({callbackFirstName, callbackLastName}) => {
+const FirstLast = ({callbackFirstLastName}) => {
+  let dataParent = {
+    firstname: '',
+    lastname: '',
+  };
   return (
     <View>
       <View style={stylesLogin.fieldControl}>
@@ -18,7 +22,10 @@ const FirstLast = ({callbackFirstName, callbackLastName}) => {
         <TextInput
           style={stylesLogin.input}
           placeholder="e.g. johndoe"
-          onChangeText={(text) => callbackFirstName(text)}
+          onChangeText={(text) => [
+            (dataParent.firstname = text),
+            callbackFirstLastName(dataParent),
+          ]}
         />
       </View>
       <View style={stylesLogin.fieldControl}>
@@ -26,7 +33,10 @@ const FirstLast = ({callbackFirstName, callbackLastName}) => {
         <TextInput
           style={stylesLogin.input}
           placeholder="e.g. .Jr"
-          onChangeText={(text) => callbackLastName(text)}
+          onChangeText={(text) => [
+            (dataParent.lastname = text),
+            callbackFirstLastName(dataParent),
+          ]}
         />
       </View>
     </View>

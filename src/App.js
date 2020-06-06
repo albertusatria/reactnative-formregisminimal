@@ -17,6 +17,8 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import stylesLogin from '../src/asset/style';
+import FirstLast from './component/FirstLast';
+
 const App = () => {
   const [total, setTotal] = useState(0);
   const [username, setUsername] = useState('');
@@ -51,6 +53,7 @@ const App = () => {
                   onChangeText={(text) => setPassword(text)}
                 />
               </View>
+              <FirstLast />
               <View>
                 <TouchableOpacity style={stylesLogin.btnSubmit}>
                   <Text

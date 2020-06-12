@@ -40,6 +40,29 @@ const stylesLogin = StyleSheet.create({
     textAlign: 'center',
     width: '100%',
   },
+  itemActivityContainer: {
+    borderBottomWidth: 1,
+    borderBottomColor: '#d9d9d9',
+    paddingBottom: 5,
+    marginBottom: 15,
+  },
+  itemActivity: {
+    fontSize: 14,
+    textTransform: 'capitalize',
+  },
+  itemActivityNotFound: {
+    fontStyle: 'italic',
+    fontSize: 12,
+  },
+  headings: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 20,
+  },
+  itemActivityStatus: {
+    fontSize: 12,
+    textTransform: 'lowercase',
+  },
 });
 
 export default stylesLogin;

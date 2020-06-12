@@ -1,3 +1,4 @@
+/* eslint-disable no-sparse-arrays */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -7,19 +8,20 @@
  */
 
 import React from 'react';
-import {TouchableOpacity, Text, Alert} from 'react-native';
+import {View, TouchableOpacity, Text} from 'react-native';
 import stylesLogin from '../../asset/style';
 
-const ButtonCustom = ({type}) => {
-  // eslint-disable-next-line no-sparse-arrays
-  return [
-    <TouchableOpacity style={stylesLogin.btnSubmit}>
-      <Text style={stylesLogin.btnText} onPress={() => Alert.alert('Login!')}>
-        {type}
-      </Text>
-    </TouchableOpacity>,
-    ,
-  ];
+const ButtonCustom = ({type, callbackButton}) => {
+  const isButtonPressed = () => {
+    callbackButton(true);
+  };
+  return (
+    <View>
+      <TouchableOpacity style={stylesLogin.btnSubmit} onPress={isButtonPressed}>
+        <Text style={stylesLogin.btnText}>{type}</Text>
+      </TouchableOpacity>
+    </View>
+  );
 };
 
 export default ButtonCustom;

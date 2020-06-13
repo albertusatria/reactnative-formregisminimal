@@ -1,58 +1,22 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
+import * as React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import Home from './pages/Home';
+import Profile from './pages/Profile';
 
-import React, {useState} from 'react';
-import {View, SafeAreaView, ScrollView, Platform} from 'react-native';
-
-import Activity from './component/Activity';
-import ButtonCustom from './component/ButtonCustom';
-import ListActivity from './component/ListActivity';
-
+const Stack = createStackNavigator();
 const App = () => {
-  //   const [formdata, setFormdata] = useState(Platform.OS === 'ios' ? '' : null);
-  const [formdata, setFormdata] = useState([]);
-  const [datacallback, setDatacallback] = useState([]);
-
-  const callbackFormActivities = (value) => {
-    setDatacallback(value);
-  };
-
-  const callbackButton = (value) => {
-    if (value) {
-      let newSubmittedData = [...formdata];
-      newSubmittedData.push(datacallback);
-      setFormdata(newSubmittedData);
-      //console.log(newSubmittedData);
-    }
-  };
-
   return (
-    <View>
-      <SafeAreaView>
-        <View
-          style={{
-            margin: 10,
-          }}>
-          <ScrollView>
-            <Activity callbackFormActivities={callbackFormActivities} />
-            <ButtonCustom type="Add Task" callbackButton={callbackButton} />
-          </ScrollView>
-          <View
-            style={{
-              borderBottomColor: '#9a9a9a',
-              borderBottomWidth: 1,
-              margin: 20,
-            }}
-          />
-          <ListActivity submittedData={formdata} />
-        </View>
-      </SafeAreaView>
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{title: 'Welcome'}}
+        />
+        <Stack.Screen name="Profile" component={Profile} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 

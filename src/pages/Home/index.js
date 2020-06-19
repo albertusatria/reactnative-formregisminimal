@@ -18,7 +18,12 @@ const Home = ({navigation}) => {
   const [password, setPassword] = useState(Platform.OS === 'ios' ? '' : null);
   const storeData = async (value) => {
     try {
-      await AsyncStorage.setItem('token', value);
+      let tokenData = {
+        type: 'signin',
+        token: value,
+      };
+      const tokenJSON = JSON.stringify(tokenData);
+      await AsyncStorage.setItem('token', tokenJSON);
     } catch (e) {
       // saving error
     }
@@ -26,6 +31,10 @@ const Home = ({navigation}) => {
   const checkLocal = async () => {
     const value = await AsyncStorage.getItem('token');
     console.log(value);
+  };
+  const removeLocal = async () => {
+    const value = await AsyncStorage.removeItem('token');
+    console.log('Done');
   };
   const postLogin = () => {
     console.log('postLogin');
@@ -57,6 +66,7 @@ const Home = ({navigation}) => {
               <View style={stylesLogin.fieldControl}>
                 <Text style={stylesLogin.label}>Username</Text>
                 <TextInput
+                  placeholder="e.g. johndoe"
                   style={stylesLogin.input}
                   onChangeText={(text) => setUsername(text)}
                 />
@@ -65,6 +75,7 @@ const Home = ({navigation}) => {
                 <Text style={stylesLogin.label}>Password</Text>
                 <TextInput
                   style={stylesLogin.input}
+                  secureTextEntry={true}
                   onChangeText={(text) => setPassword(text)}
                 />
               </View>
@@ -80,6 +91,13 @@ const Home = ({navigation}) => {
                   style={stylesLogin.btnSubmit}
                   onPress={checkLocal}>
                   <Text style={stylesLogin.btnText}>Check Local Storage</Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                <TouchableOpacity
+                  style={stylesLogin.btnSubmit}
+                  onPress={removeLocal}>
+                  <Text style={stylesLogin.btnText}>Remove Local Storage</Text>
                 </TouchableOpacity>
               </View>
             </View>

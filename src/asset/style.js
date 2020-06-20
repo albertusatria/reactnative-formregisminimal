@@ -1,6 +1,19 @@
 import {StyleSheet} from 'react-native';
 
-const stylesLogin = StyleSheet.create({
+const stylesApp = StyleSheet.create({
+  landingpagewrapper: {
+    backgroundColor: '#d9d9d9',
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  landingpage: {
+    padding: 20,
+  },
+  landingpageTitleWrapper: {
+    marginBottom: 50,
+    alignItems: 'center',
+  },
   wrapper: {
     borderWidth: 1,
     borderColor: '#d9d9d9',
@@ -27,6 +40,14 @@ const stylesLogin = StyleSheet.create({
     paddingRight: 10,
     paddingVertical: 0, //https://stackoverflow.com/questions/37878613/react-native-textinput-displays-wrong-when-changing-height-on-android
   },
+  btnNavigate: {
+    display: 'flex',
+    justifyContent: 'center',
+    borderRadius: 5,
+    backgroundColor: '#c40827',
+    height: 30,
+    width: 200,
+  },
   btnSubmit: {
     display: 'flex',
     justifyContent: 'center',
@@ -34,6 +55,7 @@ const stylesLogin = StyleSheet.create({
     backgroundColor: '#c40827',
     height: 30,
     width: '100%',
+    marginBottom: 20,
   },
   btnText: {
     color: '#ffffff',
@@ -63,6 +85,12 @@ const stylesLogin = StyleSheet.create({
     fontSize: 12,
     textTransform: 'lowercase',
   },
+  buttonContainer: {
+    marginTop: 20,
+    marginBottom: 10,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
 });
 
-export default stylesLogin;
+export default stylesApp;

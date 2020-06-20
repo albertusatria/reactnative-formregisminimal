@@ -10,16 +10,18 @@ import {
 import stylesLogin from '../../asset/style';
 import {removeStorage} from '../../component/SessionStorage';
 import {FlatList} from 'react-native-gesture-handler';
-
-const Home = ({navigation}) => {
+import {connect} from 'react-redux';
+const Home = ({auth}) => {
   const logout = () => {
     removeStorage('customertoken').then((response) => {
       console.log('Logout');
     });
-    navigation.navigate('Landingpage');
+    //navigation.navigate('Landingpage');
   };
 
   const ItemList = ({title}) => {
+    const {user} = auth;
+    console.log(user);
     return (
       <View>
         <Text>{title}</Text>
@@ -88,4 +90,8 @@ const Home = ({navigation}) => {
   );
 };
 
-export default Home;
+const mapStateToProps = (state) => ({
+  auth: state.auth,
+});
+
+export default connect(mapStateToProps, null)(Home);

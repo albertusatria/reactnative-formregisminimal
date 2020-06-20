@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {
   View,
   Text,
@@ -67,7 +67,7 @@ const Login = ({navigation, setSignIn}) => {
         token: user.token,
       };
       setSignIn(dataFormat);
-      //navigation.navigate('Home');
+      navigation.navigate('Home');
     });
   };
   return (

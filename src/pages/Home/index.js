@@ -9,6 +9,7 @@ import {
 
 import stylesLogin from '../../asset/style';
 import {removeStorage} from '../../component/SessionStorage';
+import {FlatList} from 'react-native-gesture-handler';
 
 const Home = ({navigation}) => {
   const logout = () => {
@@ -16,6 +17,49 @@ const Home = ({navigation}) => {
       console.log('Logout');
     });
     navigation.navigate('Landingpage');
+  };
+
+  const ItemList = ({title}) => {
+    return (
+      <View>
+        <Text>{title}</Text>
+      </View>
+    );
+  };
+
+  // eslint-disable-next-line no-sparse-arrays
+  const notifications = [
+    {
+      __typename: 'DataNotification',
+      content: 'Template is not found',
+      entityId: 0,
+      subject: 'Title #1',
+      unread: false,
+    },
+    {
+      __typename: 'DataNotification',
+      content: 'Template is not found',
+      entityId: 1,
+      subject: 'Title #2',
+      unread: false,
+    },
+    {
+      __typename: 'DataNotification',
+      content: 'Template is not found',
+      entityId: 2,
+      subject: 'Title #3',
+      unread: false,
+    },
+  ];
+
+  const listNotification = () => {
+    return (
+      <FlatList
+        data={notifications}
+        renderItem={({item}) => <ItemList title={item.subject} />}
+        keyExtractor={(item) => item.entityId}
+      />
+    );
   };
   return (
     <View>
@@ -28,22 +72,9 @@ const Home = ({navigation}) => {
                 Fugiat in reprehenderit velit irure id deserunt. Cillum pariatur
                 deserunt sunt in. Laboris tempor nisi id fugiat amet laboris
                 occaecat Lorem pariatur aliquip. Fugiat consectetur duis quis
-                quis ullamco adipisicing eiusmod. Ex ex ea duis eu. Tempor
-                proident enim veniam amet reprehenderit labore nulla quis quis
-                consequat esse culpa in Lorem. Laboris id ad reprehenderit nisi
-                nostrud fugiat eu ex. Dolore nostrud pariatur enim et nisi nisi
-                sint voluptate adipisicing in ad enim. Amet consequat id nulla
-                ut amet do commodo fugiat consequat exercitation consequat dolor
-                exercitation eiusmod. Sint enim mollit sunt fugiat exercitation
-                in velit dolore mollit reprehenderit non qui in. Aliqua labore
-                quis nisi labore dolore ad. Aute nostrud ad minim reprehenderit
-                dolor incididunt cillum consectetur. Amet aliquip ex enim esse
-                quis nulla. Ea mollit dolor tempor fugiat velit consectetur
-                tempor commodo ex duis. Proident velit ullamco do do occaecat
-                proident id voluptate proident nisi nostrud. Proident do ad est
-                aliqua anim minim qui cillum qui ea qui Lorem laboris
-                exercitation.
+                quis ullamco adipisicing eiusmod.
               </Text>
+              <ScrollView>{listNotification()}</ScrollView>
             </View>
             <View>
               <TouchableOpacity style={stylesLogin.btnSubmit} onPress={logout}>

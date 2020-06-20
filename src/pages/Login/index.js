@@ -61,6 +61,7 @@ const Login = ({navigation}) => {
       const userData = data.generateCustomerTokenCustom;
       //   console.log(userData.token);
       storeData(userData.token);
+      navigation.navigate('Home');
     });
   };
   return (

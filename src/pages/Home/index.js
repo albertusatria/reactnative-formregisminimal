@@ -14,8 +14,8 @@ const Home = ({navigation}) => {
   const logout = () => {
     removeStorage('customertoken').then((response) => {
       console.log('Logout');
-      //navigation('Home');
     });
+    navigation.navigate('Landingpage');
   };
   return (
     <View>

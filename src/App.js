@@ -33,8 +33,8 @@ const App = () => {
         />
         <Stack.Screen
           name="Home"
-          component={isLogin ? Home : Landingpage}
-          options={{title: 'Welcome'}}
+          component={Home}
+          options={{title: 'The Apps'}}
         />
         <Stack.Screen name="Profile" component={Profile} />
         <Stack.Screen name="Login" component={Login} />

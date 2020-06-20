@@ -11,6 +11,7 @@ import {
 import stylesApp from '../../asset/style';
 
 const Landingpage = ({navigation}) => {
+  console.log('stacknya landingpage');
   return (
     <View style={stylesApp.landingpagewrapper}>
       <SafeAreaView>

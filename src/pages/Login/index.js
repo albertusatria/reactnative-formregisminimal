@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   View,
   Text,
@@ -10,58 +10,64 @@ import {
 } from 'react-native';
 import stylesLogin from '../../asset/style';
 import {gql} from 'apollo-boost';
+import AsyncStorage from '@react-native-community/async-storage';
 import {mutate} from '../../services/graphql/api';
 
-import {
-  getStorage,
-  setStorage,
-  removeStorage,
-} from '../../component/SessionStorage';
+import {connect} from 'react-redux';
 
-const Login = ({navigation}) => {
+import AUTH_ACTION from '../../stores/actions/auth';
+
+const Login = ({navigation, setSignIn}) => {
   const [username, setUsername] = useState(Platform.OS === 'ios' ? '' : null);
   const [password, setPassword] = useState(Platform.OS === 'ios' ? '' : null);
+
+  let schema = gql`
+    mutation generateCustomerTokenCustom($email: String!, $password: String!) {
+      generateCustomerTokenCustom(username: $email, password: $password) {
+        token
+      }
+    }
+  `;
+
   const storeData = async (value) => {
     try {
-      let tokenData = {
+      let dataFormat = {
         type: 'signin',
         token: value,
       };
-      const tokenJSON = JSON.stringify(tokenData);
-      setStorage('customertoken', tokenJSON);
+      const jsonValue = JSON.stringify(dataFormat);
+      await AsyncStorage.setItem('token', jsonValue);
     } catch (e) {
-      // saving error
+      console.log(e);
     }
   };
+
   const checkLocal = async () => {
-    getStorage('customertoken').then((response) => {
-      console.log(response);
-    });
+    const value = await AsyncStorage.getItem('token');
+    console.log(value);
   };
+
   const removeLocal = async () => {
-    removeStorage('customertoken');
+    try {
+      await AsyncStorage.removeItem('token');
+    } catch (e) {
+      console.log(e);
+    }
     console.log('Done');
   };
   const postLogin = () => {
-    console.log('postLogin');
-    let schema = gql`
-      mutation generateCustomerTokenCustom(
-        $email: String!
-        $password: String!
-      ) {
-        generateCustomerTokenCustom(username: $email, password: $password) {
-          token
-        }
-      }
-    `;
-    let querySent = {email: username, password: password};
-    // console.log(username);
-    mutate(schema, querySent).then((response) => {
-      const {data} = response;
-      const userData = data.generateCustomerTokenCustom;
-      //   console.log(userData.token);
-      storeData(userData.token);
-      navigation.navigate('Home');
+    let params = {email: username, password: password};
+
+    mutate(schema, params).then((res) => {
+      const {data} = res;
+      const user = data.generateCustomerTokenCustom;
+      storeData(user.token);
+      let dataFormat = {
+        type: 'signin',
+        token: user.token,
+      };
+      setSignIn(dataFormat);
+      //navigation.navigate('Home');
     });
   };
   return (
@@ -114,5 +120,8 @@ const Login = ({navigation}) => {
     </View>
   );
 };
+const mapDispatchToProps = (dispatch) => ({
+  setSignIn: (data) => dispatch(AUTH_ACTION.set(data)),
+});
 
-export default Login;
+export default connect(null, mapDispatchToProps)(Login);
